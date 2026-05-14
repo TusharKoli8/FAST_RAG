@@ -56,9 +56,6 @@ cd frontend
 streamlit run app.py
 ```
 
-Then open **http://localhost:8501** in your browser.
-
----
 
 ## ✨ Features
 
@@ -72,11 +69,3 @@ Then open **http://localhost:8501** in your browser.
 | **Clear Store** | Danger-zone button wipes the knowledge base from disk |
 
 ---
-
-## 🐛 Bugs Fixed from Original Code
-
-1. **`vector_store.py` — wrong embedding dimension**: `all-MiniLM-L6-v2` outputs **384** dims, not 256. Using 256 caused silent FAISS corruption.
-2. **`vector_store.py` — syntax error**: `search_similar_chunks(question k=3)` was missing a comma → `(question, k=3)`.
-3. **`rag.py` — wrong return value**: `load_pdf` returned `len(text_chunks)` (an int), but `app.py` called `len(chunks)` on it, raising `TypeError`.
-4. **`rag.py` — invalid Groq model string**: `"openai/gpt-oss-120b"` is not a valid Groq model; replaced with `"llama3-70b-8192"`.
-5. **No persistent storage**: FAISS index and chunks were only in memory — lost on every restart. Fixed by saving to `storage/faiss.index` and `storage/chunks.json`.
